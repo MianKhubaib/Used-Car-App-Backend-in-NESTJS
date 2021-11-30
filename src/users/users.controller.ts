@@ -20,6 +20,7 @@ import { AuthService } from './auth.service';
 import { User } from './user.entity';
 import { CurrentUser } from './decorators/current-user.decorator';
 import { AuthGuard } from '../guards/auth.guard';
+import { ApiBearerAuth } from '@nestjs/swagger';
 @Controller('auth')
 @Serialize(UserDto)
 export class UsersController {
@@ -39,6 +40,7 @@ export class UsersController {
 
   @Get('/whoami')
   @UseGuards(AuthGuard)
+  @ApiBearerAuth()
   whoAmI(@CurrentUser() user: User) {
     return user;
   }
